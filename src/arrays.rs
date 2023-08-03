@@ -56,7 +56,36 @@ pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {
     res
 }
 
-pub fn duplicate_zeros(arr: &mut Vec<i32>) {}
+pub fn duplicate_zeros(arr: &mut Vec<i32>) -> (i32, i32) {
+    let arr_len = arr.len() as i32;
+    let mut incr = 0;
+    let mut index = 0;
+
+    loop {
+        if incr + index + 1 >= arr_len {
+            break;
+        }
+
+        if arr[index as usize] == 0 {
+            incr += 1;
+        }
+
+        index += 1
+    }
+    return (incr, index);
+    // if incr != 0 {
+    //     while index >= 0 {
+    //         arr[incr as usize + index as usize] = arr[index as usize];
+
+    //         if arr[incr as usize + index as usize] == 0 && index + incr + 1 != arr_len {
+    //             incr -= 1;
+    //             arr[incr as usize + index as usize] = 0;
+    //         }
+    //         index -= 1;
+    //     }
+    // }
+    // return arr;
+}
 
 #[test]
 fn find_max_consecutive_ones_test() {
