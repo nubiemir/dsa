@@ -56,35 +56,33 @@ pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {
     res
 }
 
-pub fn duplicate_zeros(arr: &mut Vec<i32>) -> (i32, i32) {
-    let arr_len = arr.len() as i32;
-    let mut incr = 0;
-    let mut index = 0;
+pub fn duplicate_zeros(arr: &mut Vec<i32>) -> (i32, i32, i32) {
+    let length = arr.len();
+    let mut index: i32 = 0;
+    let mut zero_counter = 0;
 
     loop {
-        if incr + index + 1 >= arr_len {
+        if arr[index as usize] == 0 && index + zero_counter < (length - 1) as i32 {
+            zero_counter += 1;
+        }
+        if index + zero_counter >= (length - 1) as i32 {
             break;
         }
-
-        if arr[index as usize] == 0 {
-            incr += 1;
-        }
-
-        index += 1
+        index += 1;
     }
-    return (incr, index);
-    // if incr != 0 {
-    //     while index >= 0 {
-    //         arr[incr as usize + index as usize] = arr[index as usize];
 
-    //         if arr[incr as usize + index as usize] == 0 && index + incr + 1 != arr_len {
-    //             incr -= 1;
-    //             arr[incr as usize + index as usize] = 0;
-    //         }
-    //         index -= 1;
-    //     }
-    // }
-    // return arr;
+    while zero_counter > 0 && index >= 0 {
+        if arr[index as usize] == 0 && index + zero_counter < (length - 1) as i32 {
+            arr[index as usize + zero_counter as usize] = arr[index as usize];
+            zero_counter -= 1;
+            arr[index as usize + zero_counter as usize] = arr[index as usize];
+        } else {
+            arr[index as usize + zero_counter as usize] = arr[index as usize];
+        }
+        index -= 1;
+    }
+
+    (index as i32, zero_counter as i32, length as i32)
 }
 
 #[test]
