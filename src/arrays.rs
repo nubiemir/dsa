@@ -56,7 +56,7 @@ pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {
     res
 }
 
-pub fn duplicate_zeros(arr: &mut Vec<i32>) -> (i32, i32, i32) {
+pub fn duplicate_zeros(arr: &mut Vec<i32>) {
     let length = arr.len();
     let mut index: i32 = 0;
     let mut zero_counter = 0;
@@ -81,9 +81,61 @@ pub fn duplicate_zeros(arr: &mut Vec<i32>) -> (i32, i32, i32) {
         }
         index -= 1;
     }
-
-    (index as i32, zero_counter as i32, length as i32)
 }
+
+
+pub fn merge(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) {
+           let mut ptr1: i32 = m - 1;
+           let mut ptr2: i32 = n - 1;
+
+            loop{
+                if (ptr1 < 0) || (ptr2 < 0) || (n==0) {
+                    break;
+                }
+
+                if nums1[ptr1 as usize] > nums2[ptr2 as usize]{
+                    nums1[ptr1 as usize + ptr2 as usize + 1] = nums1[ptr1 as usize];
+                    ptr1 -= 1;
+                }else {
+                    nums1[ptr1 as usize + ptr2 as usize + 1] = nums2[ptr2 as usize];
+                    ptr2 -= 1;
+                }
+            }
+            loop {
+                if ptr2 <  0 {
+                    break;
+                }
+                nums1[ptr2 as usize] = nums2[ptr2 as usize];
+                ptr2 -= 1;
+            }
+}
+
+
+pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> i32 {
+        let mut ptr1: i32 = 0;
+        let mut ptr2: i32 = (nums.len() - 1) as i32;
+
+        loop {
+            
+            if ptr1 > ptr2 {
+                return ptr1;
+            }
+
+            if nums[ptr1 as usize] == val {
+                if nums[ptr2 as usize] == val {
+                    nums[ptr2 as usize] = 0;
+                    ptr2 -= 1;
+                    continue;
+                }
+                nums[ptr1 as usize] = nums[ptr2 as usize];
+                nums[ptr2 as usize] = 0;
+                ptr2 -= 1;
+                continue;           
+            }
+            ptr1 += 1;
+        }
+}
+
 
 #[test]
 fn find_max_consecutive_ones_test() {
