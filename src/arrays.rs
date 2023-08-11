@@ -1,4 +1,14 @@
 pub fn find_max_consecutive_ones(nums: Vec<i32>) -> i32 {
+    // max variable will be used as the return as the consecutive values will be stored there
+    // i variable will be used as the counter for the consecutive values
+    // loop through each value in vector
+    // check if the value is one the i counter will increment
+    // if the value is different from one and i counter is greater than max:
+        // set max to the value of the i counter
+        // reinitialize the i counter to 0 for continuing the iteration
+    // if the value is neither 1 or i is < max set i counter to 0
+    // finally return max
+    
     let mut max = 0;
     let mut i = 0;
     for val in nums {
