@@ -1,9 +1,12 @@
-use arrays::duplicate_zeros;
+use arrays::{duplicate_zeros, remove_duplicates};
+
+use crate::arrays::check_if_exist;
 
 mod arrays;
 
 fn main() {
-    let mut x = vec![1, 5, 2, 0, 6, 8, 0, 6, 0];
+    let mut x = vec![10, 2, 5, 3];
 
-    //     println!("res => {:?}", res);
+    let y = check_if_exist(x);
+    println!("{}", y);
 }
